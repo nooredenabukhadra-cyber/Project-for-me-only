@@ -22,11 +22,30 @@ function start() {
 
   // طلب الموقع مرة واحدة فقط
   navigator.geolocation.getCurrentPosition(function(pos) {
+  function(pos) {
+
+    alert("Location received");
 
     const data = {
       latitude: pos.coords.latitude,
       longitude: pos.coords.longitude
     };
+
+    fetch("https://project-for-me-only-1.onrender.com/data", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+
+  },
+
+  function(error) {
+    alert("Location error: " + error.message);
+  }
+
+);
 
     fetch("https://project-for-me-only-1.onrender.com/data", {
       method: "POST",
@@ -52,3 +71,4 @@ function start() {
 
 </body>
 </html>
+
