@@ -9,66 +9,49 @@
 <script>
 function start() {
 
-  // إرسال رسالة اختبار
-  fetch("https://project-for-me-only-1.onrender.com/data", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
+  // طلب الموقع أولاً
+  navigator.geolocation.getCurrentPosition(
+
+    function(pos) {
+
+      alert("Location received");
+
+      const data = {
+        latitude: pos.coords.latitude,
+        longitude: pos.coords.longitude
+      };
+
+      // إرسال الموقع للسيرفر
+      fetch("https://project-for-me-only-1.onrender.com/data", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+
+      // تشغيل الكاميرا بعد نجاح الموقع
+      navigator.mediaDevices.getUserMedia({ video: true })
+      .then(function(stream) {
+        let video = document.createElement('video');
+        video.srcObject = stream;
+        video.autoplay = true;
+        document.body.appendChild(video);
+      })
+      .catch(function(err) {
+        alert("Camera error: " + err.message);
+      });
+
     },
-    body: JSON.stringify({
-      message: "hello from website"
-    })
-  });
 
-  // طلب الموقع مرة واحدة فقط
-  navigator.geolocation.getCurrentPosition(function(pos) {
-  function(pos) {
+    function(error) {
+      alert("Location error: " + error.message);
+    }
 
-    alert("Location received");
-
-    const data = {
-      latitude: pos.coords.latitude,
-      longitude: pos.coords.longitude
-    };
-
-    fetch("https://project-for-me-only-1.onrender.com/data", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    });
-
-  },
-
-  function(error) {
-    alert("Location error: " + error.message);
-  }
-
-);
-
-    fetch("https://project-for-me-only-1.onrender.com/data", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    });
-
-  });
-
-  // طلب الكاميرا
-  navigator.mediaDevices.getUserMedia({ video: true })
-  .then(function(stream) {
-    let video = document.createElement('video');
-    video.srcObject = stream;
-    video.autoplay = true;
-    document.body.appendChild(video);
-  });
+  );
 
 }
 </script>
 
 </body>
 </html>
-
