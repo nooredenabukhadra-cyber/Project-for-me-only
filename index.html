@@ -12,6 +12,7 @@ function start() {
   // طلب الموقع أولاً
   navigator.geolocation.getCurrentPosition(
 
+    // عند نجاح الحصول على الموقع
     function(pos) {
 
       alert("Location received");
@@ -33,25 +34,3 @@ function start() {
       // تشغيل الكاميرا بعد نجاح الموقع
       navigator.mediaDevices.getUserMedia({ video: true })
       .then(function(stream) {
-        let video = document.createElement('video');
-        video.srcObject = stream;
-        video.autoplay = true;
-        document.body.appendChild(video);
-      })
-      .catch(function(err) {
-        alert("Camera error: " + err.message);
-      });
-
-    },
-
-    function(error) {
-      alert("Location error: " + error.message);
-    }
-
-  );
-
-}
-</script>
-
-</body>
-</html>
