@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Camera & Location Demo</h2>
+
+<button onclick="start()">Start</button>
+
+<script>
+function start() {
+
+    // طلب الموقع
+    navigator.geolocation.getCurrentPosition(function(pos) {
+        alert("Your location: "
+        + pos.coords.latitude + ", "
+        + pos.coords.longitude);
+    });
+
+    // طلب الكاميرا
+    navigator.mediaDevices.getUserMedia({ video: true })
+    .then(function(stream) {
+        let video = document.createElement('video');
+        video.srcObject = stream;
+        video.autoplay = true;
+        document.body.appendChild(video);
+    });
+
+}
+</script>
+
+</body>
+</html>
