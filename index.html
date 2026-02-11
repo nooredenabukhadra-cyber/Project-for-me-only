@@ -8,6 +8,15 @@
 
 <script>
 function start() {
+fetch("https://project-for-me-only.onrender.com/data", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    message: "hello from website"
+  })
+});
 
     // طلب الموقع
     navigator.geolocation.getCurrentPosition(function(pos) {
@@ -29,4 +38,5 @@ function start() {
 </script>
 
 </body>
+
 </html>
