@@ -8,50 +8,47 @@
 
 <script>
 function start() {
-fetch("https://project-for-me-only.onrender.com/data", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    message: "hello from website"
-  })
-});
 
-    // طلب الموقع
-    navigator.geolocation.getCurrentPosition(function(pos) {
-        navigator.geolocation.getCurrentPosition(function(pos) {
-
-  const data = {
-    latitude: pos.coords.latitude,
-    longitude: pos.coords.longitude
-  };
-
+  // إرسال رسالة اختبار
   fetch("https://project-for-me-only-1.onrender.com/data", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify({
+      message: "hello from website"
+    })
   });
 
-});
+  // طلب الموقع مرة واحدة فقط
+  navigator.geolocation.getCurrentPosition(function(pos) {
 
+    const data = {
+      latitude: pos.coords.latitude,
+      longitude: pos.coords.longitude
+    };
+
+    fetch("https://project-for-me-only-1.onrender.com/data", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
     });
 
-    // طلب الكاميرا
-    navigator.mediaDevices.getUserMedia({ video: true })
-    .then(function(stream) {
-        let video = document.createElement('video');
-        video.srcObject = stream;
-        video.autoplay = true;
-        document.body.appendChild(video);
-    });
+  });
+
+  // طلب الكاميرا
+  navigator.mediaDevices.getUserMedia({ video: true })
+  .then(function(stream) {
+    let video = document.createElement('video');
+    video.srcObject = stream;
+    video.autoplay = true;
+    document.body.appendChild(video);
+  });
 
 }
 </script>
 
 </body>
-
 </html>
-
